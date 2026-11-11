@@ -71,8 +71,8 @@ The first script creates analysis objects and plots. The second writes PNG figur
 | `01_import_data.R` | Current sequential analysis, from import through sensitivity checks |
 | `02_export_results.R` | Export current results and record the R environment |
 | `docs/data_access.md` | Source links and exact input filenames |
-| `results/figures/` | Generated figures; local exports awaiting upload |
-| `results/tables/` | Generated result tables; local exports awaiting upload |
+| `results/figures/` | Exported analysis figures |
+| `results/tables/` | Exported differential, integration, and sensitivity tables |
 
 ## Interpretation and limitations
 
