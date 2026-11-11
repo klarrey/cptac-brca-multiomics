@@ -1,0 +1,14 @@
+# Downloaded source data and local reference publications
+/data/
+/publication/
+# R session and IDE state
+.Rhistory
+.RData
+.RDataTmp
+.Rproj.user/
+Rplots.pdf
+# Local environment settings
+.Renviron
+# OS files
+.DS_Store
+Thumbs.db
