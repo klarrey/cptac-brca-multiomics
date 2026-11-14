@@ -2,15 +2,43 @@
 #Pathway level integration
 #==========================================================
 
-## Install packages if needed
+# Install packages if needed
+
+# Run from the project root after 01_import_data.R
+
+required_objects <- c("rna_results", "protein_results")
+
+missing_objects <- required_objects[
+  !vapply(required_objects, exists, logical(1), inherits = TRUE)
+]
+
+if (length(missing_objects) > 0L) {
+  stop(
+    "Run 01_import_data.R first. Missing objects: ",
+    paste(missing_objects, collapse = ", ")
+  )
+}
+
 if (!requireNamespace("msigdbr", quietly = TRUE)) {
   install.packages("msigdbr")
 }
 
 if (!requireNamespace("fgsea", quietly = TRUE)) {
+  if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+  }
+  
   BiocManager::install("fgsea", ask = FALSE, update = FALSE)
 }
 
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+
+# Create output folders before saving figures or tables
+for (folder in c("results/figures", "results/tables", "docs")) {
+  dir.create(folder, recursive = TRUE, showWarnings = FALSE)
+}
 # Retrieve human Hallmark gene sets
 hallmark_data <- msigdbr::msigdbr(
   species = "Homo sapiens",
@@ -21,6 +49,21 @@ hallmark_data <- msigdbr::msigdbr(
 hallmark_pathways <- lapply(
   split(hallmark_data$gene_symbol, hallmark_data$gs_name),
   unique
+)
+
+
+# Preserve the gene sets used in this analysis
+saveRDS(
+  hallmark_pathways,
+  "results/tables/hallmark_pathways_used.rds"
+)
+
+writeLines(
+  paste(
+    "MSigDB database version:",
+    paste(unique(hallmark_data$db_version), collapse = ", ")
+  ),
+  "docs/hallmark_database_version.txt"
 )
 
 # Record the gene-set database version
@@ -334,7 +377,7 @@ pathway_plot <- ggplot2::ggplot(
   ) +
   ggplot2::labs(
     title = "Hallmark enrichment across RNA and protein",
-    subtitle = "Positive NES: Basal-associated | Negative NES: LumA-associated",
+    subtitle = "Positive NES: Basal | Negative NES: LumA",
     x = NULL,
     y = NULL,
     color = "NES",
