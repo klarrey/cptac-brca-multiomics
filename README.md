@@ -60,7 +60,7 @@ Restricting both rankings to shared genes retains **20 of the original 21** conc
 
 The pathway script completed on the author's machine with RNA ranking-tie warnings. Duplicate nonzero statistics account for 603/15,743 RNA ranking entries (3.83%) and 55/8,133 shared RNA entries (0.68%); neither protein ranking has ties. Original ranking values and ordering are retained. No jitter or alternative tie-order analysis is applied; sensitivity to tie ordering has not been assessed.
 
-This checkpoint includes the uploaded pathway script and documented results from the author's R outputs. The newly generated pathway figure, CSV exports, and refreshed environment record remain to be synchronized from the author's local project. The full workflow has not been independently rerun here.
+This checkpoint includes the executed pathway script, one pathway comparison figure, ten pathway CSV tables, the saved Hallmark gene sets, the database-version record, and refreshed session information. The pathway script completed on the author's machine; a fresh-session reproduction of the full workflow remains pending.
 
 ## Run the project
 
@@ -117,4 +117,4 @@ The first script creates analysis objects and plots. The second writes PNG figur
 - Within-gene RNA–protein correlations, accounting for subtype structure.
 - Unsupervised multi-omics integration and a reproducible report.
 
-Later analyses will be added through commits in this repository. Pathway analysis is included in this checkpoint; its local generated exports are awaiting synchronization.
+Later analyses will be added through commits in this repository. Pathway analysis and its generated exports are included in this checkpoint.
